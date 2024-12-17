@@ -1,19 +1,19 @@
 
 import './App.css'
 import TaskCard from './task-card'
-
+import { Task } from './data-tasks'
 
 function App() {
-  const title = "Do Market Research"
-  const id = "BUS-1"
-  const points = 5
+  const task: Task = {
+    title: "Do Mark",
+    id: 'BUS-1',
+    points: 5,
+  }
   
   return (
     <>
-      <TaskCard title = {title} id = {id} points = {points}></TaskCard>
-      <TaskCard title = {title} id = {id} points = {points}></TaskCard>
-      <TaskCard title = {title} id = {id} points = {points}></TaskCard>
-      <TaskCard title = {title} id = {id} points = {points}></TaskCard>
+      <TaskCard task={task} ></TaskCard>
+    
     </>
     
   )
