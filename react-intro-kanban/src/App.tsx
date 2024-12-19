@@ -27,10 +27,12 @@ function App() {
     setTasks(updatedTasks)
   }
 
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, status: string) => {
+
   return (
     <div className="flex divide-x">
       {columns.map((column) => (
-        <div>
+        <div onDrop={(e) => handleDrop(e, column.title)}>
           <div className='flex justify-between text-3xl p-2 font-bold'>
           <h2 className="capitalize">{column.title}</h2>
           {column.tasks.reduce((total, task) => total + (task?.points || 0), 0)}
