@@ -13,9 +13,16 @@ function App() {
     }
   })
   
-  const updateTaskPoints = (task: Task, points: number) => {
+  const updateTask = (task: Task) => {
+    fetch(`http://localhost:3000/tasks/${task.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    })
     const updatedTasks = tasks.map((t) => {
-      return t.id === task.id ? { ...t, points } : t
+      return t.id === task.id ? task : t
     })
     setTasks(updatedTasks)
   }
@@ -24,14 +31,14 @@ function App() {
     <div className="flex divide-x">
       {columns.map((column) => (
         <div>
-          <div className='flex justify-between text-3xl p-2 font-bold text-gray-500'>
+          <div className='flex justify-between text-3xl p-2 font-bold'>
           <h2 className="capitalize">{column.title}</h2>
           {column.tasks.reduce((total, task) => total + (task?.points || 0), 0)}
           </div>
           {column.tasks.map((task) => 
           <TaskCard 
           task={task} 
-          updateTaskPoints={updateTaskPoints}
+          updateTask={updateTask}
           />)}
         </div>
       ))}
